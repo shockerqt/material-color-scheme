@@ -1,0 +1,22 @@
+:root {
+  font-family: 'Inter', sans-serif;
+  font-size: calc(10px + 0.7vw);
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: 'Inter var', sans-serif;
+  }
+}
+
+@supports (font-variation-settings: normal) {
+  :root {
+    font-family: 'Inter var', sans-serif;
+  }
+}
+
+body {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+}

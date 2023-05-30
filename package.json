@@ -2,12 +2,20 @@
   "name": "material-color-scheme",
   "version": "1.0.0",
   "description": "Generate a color scheme based on Material Design.",
-  "main": "dist/index.js",
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "type": "module",
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
-    "test": "jest",
-    "lint": "eslint ."
+    "dev": "rollup -c --watch",
+    "build": "rollup -c",
+    "lint": "eslint .",
+    "docs:install": "npm install --prefix src",
+    "docs:dev": "npm run dev --prefix src",
+    "docs:build": "npm run build --prefix src"
   },
   "repository": {
     "type": "git",
@@ -26,16 +34,19 @@
     "url": "https://github.com/shockerqt/material-color-scheme/issues"
   },
   "homepage": "https://github.com/shockerqt/material-color-scheme#readme",
-  "files": ["dist"],
   "devDependencies": {
-    "@types/jest": "^29.5.1",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-typescript": "^11.1.1",
     "@typescript-eslint/eslint-plugin": "^5.59.8",
     "@typescript-eslint/parser": "^5.59.8",
     "eslint": "^8.41.0",
     "eslint-config-prettier": "^8.8.0",
-    "jest": "^29.5.0",
     "prettier": "^2.8.8",
-    "ts-jest": "^29.1.0",
+    "rollup": "^3.23.0",
+    "tslib": "^2.5.2",
     "typescript": "^5.0.4"
+  },
+  "dependencies": {
+    "@material/material-color-utilities": "^0.2.6"
   }
 }
