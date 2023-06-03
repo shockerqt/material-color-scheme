@@ -1,5 +1,5 @@
 import typescript from '@rollup/plugin-typescript';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
+// import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default {
   input: 'lib/index.ts',
@@ -8,5 +8,5 @@ export default {
     dir: 'dist',
     sourcemap: true,
   },
-  plugins: [nodeResolve(), typescript()],
+  plugins: [typescript()],
 };

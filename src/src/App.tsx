@@ -1,11 +1,11 @@
 import { useDeferredValue, useEffect, useMemo, useState } from 'react';
-import { schemesFromColor } from 'material-color-scheme';
+import { namedToHex, schemesFromColor } from 'material-color-scheme';
 import './App.css';
 
 const customColorsInitialValue = [
   {
     name: 'quaternary',
-    value: '#387434',
+    value: 'green',
     blend: true,
   },
   {
@@ -21,7 +21,7 @@ const customColorsInitialValue = [
 ];
 
 function App() {
-  const [color, setColor] = useState('#fffaaa');
+  const [color, setColor] = useState('blue');
   const [darkMode, setDarkMode] = useState(true);
   const [customColors, setCustomColors] = useState(customColorsInitialValue);
   const [customColorsNumber, setCustomColorsNumber] = useState(0);
@@ -82,6 +82,9 @@ function App() {
             <input type="color" value={color} onChange={onColorChange} />
             <label htmlFor="">Base</label>
           </div>
+          <button onClick={() => console.log(namedToHex('green'))}>
+            to green
+          </button>
           {customColors?.slice(0, customColorsNumber).map(({ value, name }) => (
             <div key={name}>
               <input
@@ -94,23 +97,31 @@ function App() {
           ))}
         </div>
         <h2>Options</h2>
-        <div className="checkbox-container">
+        <div className="input-container">
+          <label htmlFor="darkMode">Dark mode</label>
           <input
+            id="darkMode"
             type="checkbox"
             checked={darkMode}
             onChange={() => setDarkMode((current) => !current)}
           />
-          <label htmlFor="">Dark mode</label>
         </div>
-        <div className="">
-          <input
-            type="number"
-            value={customColorsNumber}
-            onChange={onChangeCustomColorsNumber}
-            min={0}
-            max={3}
-          />
-          <label htmlFor="">Dark mode</label>
+        <div className="input-container">
+          <label htmlFor="customColorsNumber">Custom Colors</label>
+          <div className="counter">
+            <div className="border-r">-</div>
+            <div className="border-r">
+              <input
+                type="number"
+                id="customColorsNumber"
+                value={customColorsNumber}
+                onChange={onChangeCustomColorsNumber}
+                min={0}
+                max={3}
+              />
+            </div>
+            <div className="">+</div>
+          </div>
         </div>
       </section>
       <div className="palette">

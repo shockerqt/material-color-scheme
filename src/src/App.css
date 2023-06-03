@@ -1,7 +1,8 @@
 #root {
-  max-width: 1280px;
+  max-width: 48rem;
   margin: 0 auto;
   padding: 2rem;
+  width: 100%;
 }
 
 input[type='color'] {
@@ -43,13 +44,6 @@ input[type='color'] {
 ::-moz-focus-inner {
 }
 
-.palette {
-  margin-top: 2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 1em;
-}
-
 .color-pickers {
   display: grid;
   grid-template-columns: repeat(auto-fit, 80px);
@@ -63,43 +57,67 @@ input[type='color'] {
   place-items: center;
 }
 
+.palette {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 5rem 5rem;
+  gap: 1em;
+}
+
 .container {
-  height: 5rem;
-  width: 12rem;
   text-align: left;
   padding: 1rem;
   border-radius: 16px;
 }
 
-.container.primary {
+.palette > .container.primary {
   color: var(--on-primary-container);
   background-color: var(--primary-container);
 }
 
-.container.secondary {
+.palette > .container.secondary {
   color: var(--on-secondary-container);
   background-color: var(--secondary-container);
 }
 
-.container.tertiary {
+.palette > .container.tertiary {
   color: var(--on-tertiary-container);
   background-color: var(--tertiary-container);
 }
 
-.container.quaternary {
+.palette > .container.quaternary {
   color: var(--on-quaternary-container);
   background-color: var(--quaternary-container);
 }
 
-.container.quinary {
+.palette > .container.quinary {
   color: var(--on-quinary-container);
   background-color: var(--quinary-container);
 }
 
-.container.senary {
+.palette > .container.senary {
   color: var(--on-senary-container);
   background-color: var(--senary-container);
 }
 
-.checkbox-container {
+.input-container {
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5em 0;
+  height: 2em;
+}
+
+.counter {
+  display: grid;
+  grid-template-columns: 2rem 2rem 2rem;
+  border-radius: 16px;
+  border: 1px solid var(--outline);
+}
+
+.border-r {
+  border-right-style: solid;
+  border-right-width: 1px;
 }

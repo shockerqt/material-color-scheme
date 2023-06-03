@@ -1,47 +1,15 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: var(--on-surface, rgba(255, 255, 255, 0.87));
-  background-color: var(--surface, #242424);
+  font-size: calc(7px + 0.6vw);
+  color: var(--on-background, #191c1a);
+  background-color: var(--background, #fbfdf9);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
-
-  --primary: #d9b9ff;
-  --on-primary: #460085;
-  --primary-container: #6408b6;
-  --on-primary-container: #eedbff;
-  --secondary: #cfc1da;
-  --on-secondary: #362d40;
-  --secondary-container: #4d4357;
-  --on-secondary-container: #ecddf7;
-  --tertiary: #f2b7c0;
-  --on-tertiary: #4b252c;
-  --tertiary-container: #653b42;
-  --on-tertiary-container: #ffd9de;
-  --error: #ffb4ab;
-  --on-error: #690005;
-  --error-container: #93000a;
-  --on-error-container: #ffb4ab;
-  --background: #1d1b1e;
-  --on-background: #e7e1e5;
-  --surface: #1d1b1e;
-  --on-surface: #e7e1e5;
-  --surface-variant: #4a454e;
-  --on-surface-variant: #ccc4cf;
-  --outline: #958e98;
-  --outline-variant: #4a454e;
-  --shadow: #000000;
-  --scrim: #000000;
-  --inverse-surface: #e7e1e5;
-  --inverse-on-surface: #322f33;
-  --inverse-primary: #7d33cf;
 }
 
 a {

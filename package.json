@@ -1,6 +1,6 @@
 {
   "name": "material-color-scheme",
-  "version": "1.0.0",
+  "version": "1.1",
   "description": "Generate a color scheme based on Material Design.",
   "main": "./dist/index.umd.cjs",
   "module": "./dist/index.js",
@@ -9,6 +9,12 @@
     "dist"
   ],
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
   "scripts": {
     "dev": "rollup -c --watch",
     "build": "rollup -c",
