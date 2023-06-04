@@ -63,20 +63,42 @@ function schemeToCss(scheme: MaterialColors, prefix = ''): CssMaterialColors {
 }
 
 export interface CustomColor {
-  value: string;
   name: string;
+  value: string;
   blend: boolean;
 }
 
+export interface RawColors {
+  [name: string]: string;
+}
+
+/**
+ * Generate a full color scheme from a color or a serie of colors
+ *
+ * @param color The main color of the scheme
+ * @param prefix A prefix for css vars
+ * @param customColors Generate 4 different colors from a source color
+ * @param rawColors Add custom colors as is on dark and light themes
+ * @returns A color scheme
+ */
 export function schemesFromColor(
   color: string,
-  customColors?: CustomColor[],
-  prefix = ''
+  prefix = '',
+  customColors: CustomColor[] = [],
+  rawColors: RawColors = {}
 ): Schemes {
-  const hexCustomColors = customColors?.map((hexCustomColor) => ({
+  const hexCustomColors = customColors.map((hexCustomColor) => ({
     ...hexCustomColor,
     value: argbFromHex(namedToHex(hexCustomColor.value)),
   }));
+  const hexRawColors = Object.entries(rawColors).reduce(
+    (previous, [name, value]) => ({
+      ...previous,
+      [name]: namedToHex(value),
+    }),
+    {}
+  ) as RawColors;
+
   const theme = themeFromSourceColor(
     argbFromHex(namedToHex(color)),
     hexCustomColors || []
@@ -84,12 +106,12 @@ export function schemesFromColor(
 
   const dark = Object.entries(theme.schemes.dark.toJSON()).reduce(
     (prev, [key, value]) => ({ ...prev, [key]: hexFromArgb(value) }),
-    {}
+    hexRawColors
   ) as MaterialColors;
 
   const light = Object.entries(theme.schemes.light.toJSON()).reduce(
     (prev, [key, value]) => ({ ...prev, [key]: hexFromArgb(value) }),
-    {}
+    hexRawColors
   ) as MaterialColors;
 
   const schemes = { dark, light };
