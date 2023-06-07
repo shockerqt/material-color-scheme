@@ -1,5 +1,5 @@
 import { useDeferredValue, useEffect, useMemo, useState } from 'react';
-import { schemesFromColor, setCSSRules } from 'material-color-scheme';
+import { schemesFromColor, setCSSRules } from '../../dist';
 import './App.css';
 
 const customColorsInitialValue = [
