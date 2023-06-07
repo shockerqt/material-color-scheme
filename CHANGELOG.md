@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/).
 
+## [1.3.0] - 2023-06-07
+
+### Added
+
+- `setCSSRules()`, a function to set a CSS style to the document.
+- Documentation with usage examples
+
 ## [1.2.0] - 2023-06-01
 
 ### Changed

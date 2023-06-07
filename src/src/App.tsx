@@ -1,11 +1,11 @@
 import { useDeferredValue, useEffect, useMemo, useState } from 'react';
-import { namedToHex, schemesFromColor } from 'material-color-scheme';
+import { schemesFromColor, setCSSRules } from 'material-color-scheme';
 import './App.css';
 
 const customColorsInitialValue = [
   {
     name: 'quaternary',
-    value: 'green',
+    value: '#00ff00',
     blend: true,
   },
   {
@@ -21,7 +21,7 @@ const customColorsInitialValue = [
 ];
 
 function App() {
-  const [color, setColor] = useState('blue');
+  const [color, setColor] = useState('#0000ff');
   const [darkMode, setDarkMode] = useState(true);
   const [customColors, setCustomColors] = useState(customColorsInitialValue);
   const [customColorsNumber, setCustomColorsNumber] = useState(0);
@@ -32,18 +32,10 @@ function App() {
   const schemes = useMemo(() => {
     return schemesFromColor(
       deferredColor,
+      null,
       customColors?.slice(0, customColorsNumber)
     );
   }, [deferredColor, deferredCustomColors, customColorsNumber]);
-
-  const setCssScheme = () => {
-    if (schemes?.css)
-      Object.entries(darkMode ? schemes.css.dark : schemes.css.light).forEach(
-        ([key, value]) => {
-          document.documentElement.style.setProperty(key, value);
-        }
-      );
-  };
 
   const onChangeCustomColorsNumber = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -70,7 +62,10 @@ function App() {
     });
   };
 
-  useEffect(setCssScheme, [schemes, darkMode]);
+  useEffect(
+    () => setCSSRules(darkMode ? schemes.cssDark : schemes.cssLight),
+    [schemes, darkMode]
+  );
 
   return (
     <>
@@ -82,9 +77,6 @@ function App() {
             <input type="color" value={color} onChange={onColorChange} />
             <label htmlFor="">Base</label>
           </div>
-          <button onClick={() => console.log(namedToHex('green'))}>
-            to green
-          </button>
           {customColors?.slice(0, customColorsNumber).map(({ value, name }) => (
             <div key={name}>
               <input
@@ -92,7 +84,7 @@ function App() {
                 value={value}
                 onChange={(event) => onChangeCustomColor(event, name)}
               />
-              <label htmlFor="">Base</label>
+              <label htmlFor="">{name}</label>
             </div>
           ))}
         </div>
@@ -108,23 +100,39 @@ function App() {
         </div>
         <div className="input-container">
           <label htmlFor="customColorsNumber">Custom Colors</label>
-          <div className="counter">
-            <div className="border-r">-</div>
-            <div className="border-r">
-              <input
-                type="number"
-                id="customColorsNumber"
-                value={customColorsNumber}
-                onChange={onChangeCustomColorsNumber}
-                min={0}
-                max={3}
-              />
-            </div>
-            <div className="">+</div>
+          <div className="form-inline">
+            <button
+              onClick={() => setCustomColorsNumber((n) => (n < 1 ? n : n - 1))}
+            >
+              
+            </button>
+            <input
+              type="number"
+              id="customColorsNumber"
+              value={customColorsNumber}
+              onChange={onChangeCustomColorsNumber}
+              min={0}
+              max={3}
+            />
+            <button
+              onClick={() => setCustomColorsNumber((n) => (n > 2 ? n : n + 1))}
+            >
+              
+            </button>
           </div>
         </div>
+        <div className="copy-to-clipboard-container">
+          <button
+            className="copy-to-clipboard-button"
+            onClick={() => {
+              navigator.clipboard.writeText(JSON.stringify(schemes, null, 2));
+            }}
+          >
+            Copy scheme to clipboard as JSON
+          </button>
+        </div>
       </section>
-      <div className="palette">
+      <section className="palette">
         <div className="container primary">Primary Container</div>
         <div className="container secondary">Secondary Container</div>
         <div className="container tertiary">Tertiary Container</div>
@@ -133,7 +141,7 @@ function App() {
             {name.replace(/./, (c) => c.toUpperCase())} Container
           </div>
         ))}
-      </div>
+      </section>
     </>
   );
 }

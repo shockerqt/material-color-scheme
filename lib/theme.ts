@@ -83,14 +83,16 @@ export interface RawColors {
  */
 export function schemesFromColor(
   color: string,
-  prefix = '',
+  prefix: string | undefined | null = '',
   customColors: CustomColor[] = [],
   rawColors: RawColors = {}
 ): Schemes {
-  const hexCustomColors = customColors.map((hexCustomColor) => ({
-    ...hexCustomColor,
-    value: argbFromHex(namedToHex(hexCustomColor.value)),
-  }));
+  const hexCustomColors =
+    customColors &&
+    customColors.map((hexCustomColor) => ({
+      ...hexCustomColor,
+      value: argbFromHex(namedToHex(hexCustomColor.value)),
+    }));
   const hexRawColors = Object.entries(rawColors).reduce(
     (previous, [name, value]) => ({
       ...previous,
@@ -136,3 +138,20 @@ export function schemesFromColor(
     cssLight: schemeToCss(light, prefix),
   };
 }
+
+/**
+ * Set the styles object as CSS variables in the document
+ * @param styles the styles object
+ */
+export const setCSSRules = (styles: CssMaterialColors) => {
+  if (typeof window !== undefined && typeof document !== undefined) {
+    const styleSheet = new CSSStyleSheet();
+    document.adoptedStyleSheets = [styleSheet];
+    let rules = ':root {';
+    Object.entries(styles).forEach(([key, value]) => {
+      rules += `${key}:${value};`;
+    });
+    rules += '}';
+    styleSheet.replace(rules);
+  }
+};

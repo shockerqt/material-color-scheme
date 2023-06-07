@@ -1,3 +1,12 @@
+body {
+  background-color: var(--surface);
+}
+
+h1,
+h2 {
+  color: var(--on-background);
+}
+
 #root {
   max-width: 48rem;
   margin: 0 auto;
@@ -23,25 +32,7 @@ input[type='color'] {
   color: var(--on-surface-variant);
   padding: 1rem 2rem 2rem 2rem;
   border-radius: 16px;
-}
-
-::-webkit-color-swatch {
-  padding: 0;
-  border-radius: 50%;
-  border: none;
-}
-
-::-webkit-color-swatch-wrapper {
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  border: none;
-}
-
-::-moz-color-swatch {
-}
-
-::-moz-focus-inner {
+  user-select: none;
 }
 
 .color-pickers {
@@ -59,6 +50,7 @@ input[type='color'] {
 
 .palette {
   margin-top: 2rem;
+  height: 20rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 5rem 5rem;
@@ -102,12 +94,16 @@ input[type='color'] {
 }
 
 .input-container {
-  width: 40%;
+  width: 50%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 0.5em 0;
   height: 2em;
+}
+
+.form-inline {
+  gap: 0.4rem;
 }
 
 .counter {
@@ -120,4 +116,24 @@ input[type='color'] {
 .border-r {
   border-right-style: solid;
   border-right-width: 1px;
+}
+
+input[type='number'] {
+  /* border: 1px solid var(--outline); */
+  width: 2rem;
+  text-align: center;
+  padding: 0.3rem 0;
+}
+
+.copy-to-clipboard-container {
+  text-align: center;
+}
+
+.copy-to-clipboard-button {
+  margin-top: 2rem;
+  background-color: var(--primary);
+  color: var(--on-primary);
+  border-radius: 2em;
+  padding: 0.6em 2em;
+  align-self: center;
 }
